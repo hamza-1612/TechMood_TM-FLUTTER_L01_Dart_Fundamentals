@@ -14,50 +14,50 @@ class Student {
   });
 
   void printInfo() {
-    print('الاسم: $name');
-    print('العمر: $age');
-    print('التخصص: $major');
-    print('الدرجة: $grade');
+    print('Name: $name');
+    print('Age: $age');
+    print('Major: $major');
+    print('Grade: $grade');
   }
 }
 
 double readGrade() {
   while (true) {
-    stdout.write('أدخل الدرجة من 0 إلى 100: ');
+    stdout.write('Enter grade (0-100): ');
     final input = stdin.readLineSync() ?? '';
 
     try {
       final grade = double.parse(input);
 
       if (grade < 0 || grade > 100) {
-        throw FormatException('الدرجة يجب أن تكون بين 0 و100.');
+        throw FormatException('The grade must be between 0 and 100.');
       }
 
       return grade;
     } on FormatException catch (error) {
-      print('إدخال غير صحيح: ${error.message ?? "أدخل رقمًا صالحًا."}');
+      print('Invalid input: ${error.message ?? "Please enter a valid number."}');
     }
   }
 }
 
 void main() {
-  // تخزين الطلاب في قائمة
+  // Store students in a list.
   final List<Student> students = [
-    Student(name: 'أحمد', age: 20, major: 'علوم الحاسوب', grade: 85),
-    Student(name: 'سارة', age: 21, major: 'الهندسة', grade: 72),
-    Student(name: 'ليث', age: 19, major: 'الرياضيات', grade: 45),
+    Student(name: 'Ahmed', age: 20, major: 'Computer Science', grade: 85),
+    Student(name: 'Sara', age: 21, major: 'Engineering', grade: 72),
+    Student(name: 'Laith', age: 19, major: 'Mathematics', grade: 45),
   ];
 
-  // إدخال طالب جديد
-  stdout.write('أدخل اسم الطالب: ');
-  final name = stdin.readLineSync() ?? 'غير معروف';
+  // Add a new student.
+  stdout.write('Enter student name: ');
+  final name = stdin.readLineSync() ?? 'Unknown';
 
-  stdout.write('أدخل عمر الطالب: ');
+  stdout.write('Enter student age: ');
   final ageInput = stdin.readLineSync() ?? '0';
   final age = int.tryParse(ageInput) ?? 0;
 
-  stdout.write('أدخل تخصص الطالب: ');
-  final major = stdin.readLineSync() ?? 'غير محدد';
+  stdout.write('Enter student major: ');
+  final major = stdin.readLineSync() ?? 'Undeclared';
 
   final grade = readGrade();
 
@@ -70,21 +70,21 @@ void main() {
     ),
   );
 
-  // طباعة بيانات جميع الطلاب وتحديد حالة كل طالب
-  print('\nبيانات الطلاب:');
+  // Print all student data and each student's status.
+  print('\nStudent list:');
   for (final student in students) {
     print('--------------------');
     student.printInfo();
 
     if (student.grade >= 50) {
-      print('الحالة: ناجح');
+      print('Status: Passed');
     } else {
-      print('الحالة: راسب');
+      print('Status: Failed');
     }
   }
 
-  // البحث عن طالب بالاسم
-  stdout.write('\nأدخل اسم الطالب الذي تريد البحث عنه: ');
+  // Search for a student by name.
+  stdout.write('\nEnter the name to search for: ');
   final searchName = (stdin.readLineSync() ?? '').trim().toLowerCase();
 
   Student? foundStudent;
@@ -97,9 +97,9 @@ void main() {
   }
 
   if (foundStudent != null) {
-    print('\nتم العثور على الطالب:');
+    print('\nStudent found:');
     foundStudent.printInfo();
   } else {
-    print('لم يتم العثور على طالب بهذا الاسم.');
+    print('No student with that name was found.');
   }
 }
